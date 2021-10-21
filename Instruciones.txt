@@ -12,7 +12,8 @@ Backend
 Instalacion de Dependencias:
 npm init --yes
 npm i jison 
-npm i typescript --
+npm i typescript --save-dev
+npx tsc --init
 
 Videos.
 https://www.youtube.com/watch?v=_RZ-T6TxP7w
