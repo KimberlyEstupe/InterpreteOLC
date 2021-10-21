@@ -1,0 +1,19 @@
+Frontend
+* Para correr npm start
+* Instalaciones realizadas 
+npx create-react-app frontend --template typescript// esta se hace desde la carpeta interprete ya que genera la carpeta frontend con sus dependencias respectivas 
+
+(todas estas dependencias se instalan en la carptpera frontend)
+npm i react-router-dom
+npm i --save-dev @types/react-router-dom
+npm i bootswatch
+
+Backend
+Instalacion de Dependencias:
+npm init --yes
+npm i jison 
+npm i typescript --
+
+Videos.
+https://www.youtube.com/watch?v=_RZ-T6TxP7w
+https://www.youtube.com/watch?v=wOLo-B7mrZM&t=2145s
