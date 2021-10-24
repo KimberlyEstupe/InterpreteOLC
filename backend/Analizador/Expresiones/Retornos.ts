@@ -18,4 +18,3 @@ export const Tipos = [
   [Type.ENTERO, Type.DOBLE, -1, Type.CADENA, Type.CADENA],
   [Type.CADENA, Type.CADENA, Type.CADENA, Type.CADENA, Type.CADENA],
 ];
-// TODO minutp
