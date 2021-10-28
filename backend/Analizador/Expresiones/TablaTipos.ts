@@ -4,6 +4,7 @@ export enum Type {
   BOOLEAN = 2,
   CARACTER = 3,
   CADENA = 4,
+  NULL = 5,
 }
 
 export type Retornos = {
@@ -14,7 +15,7 @@ export type Retornos = {
 export const Tipos = [
   [Type.ENTERO, Type.DOBLE, Type.ENTERO, Type.ENTERO, Type.CADENA],
   [Type.DOBLE, Type.DOBLE, Type.DOBLE, Type.DOBLE, Type.CADENA],
-  [Type.ENTERO, Type.DOBLE, -1, -1, Type.CADENA],
-  [Type.ENTERO, Type.DOBLE, -1, Type.CADENA, Type.CADENA],
+  [Type.ENTERO, Type.DOBLE, Type.NULL, Type.NULL, Type.CADENA],
+  [Type.ENTERO, Type.DOBLE, Type.NULL, Type.CADENA, Type.CADENA],
   [Type.CADENA, Type.CADENA, Type.CADENA, Type.CADENA, Type.CADENA],
 ];

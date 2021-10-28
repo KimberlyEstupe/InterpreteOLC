@@ -1,5 +1,5 @@
-import { Expresiones } from "./Expresion";
-import { Retornos, Type } from "./Retornos";
+import { Expresiones } from "./ExpresionBase";
+import { Retornos, Type } from "./TablaTipos";
 
 export enum TAritmetica {
   Suma,
@@ -14,7 +14,7 @@ export abstract class Aritmeticas extends Expresiones {
   constructor(
     private Left: Expresiones,
     private Rigt: Expresiones,
-    private tipo: TAritmetica,
+    private tipoA: TAritmetica,
     linea: number,
     col: number
   ) {
@@ -22,13 +22,19 @@ export abstract class Aritmeticas extends Expresiones {
   }
 
   public execute(): Retornos {
-    const rightV = this.Rigt.execute();
     const LefthV = this.Left.execute();
+    const rightV = this.Rigt.execute();
     let Dominante = this.TipoDominante(rightV.type, LefthV.type);
 
-    return {
-      value: LefthV.value.toString() + rightV.value.toString(),
-      type: Type.CADENA,
-    };
+    if (this.tipoA == TAritmetica.Suma) {
+      if (Dominante == Type.CADENA) {
+        return {
+          value: LefthV.value.toString() + rightV.value.toString(),
+          type: Type.CADENA,
+        };
+      }
+    }
+
+    return { value: "", type: Type.NULL };
   }
 }

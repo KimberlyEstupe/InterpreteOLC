@@ -1,5 +1,5 @@
-import { Expresiones } from "./Expresion";
-import { Type, Retornos, Tipos } from "./Retornos";
+import { Expresiones } from "./ExpresionBase";
+import { Type, Retornos, Tipos } from "./TablaTipos";
 
 export enum TLiteral {
   ENTERO = 0,
@@ -22,6 +22,12 @@ export abstract class Lirerales extends Expresiones {
   public execute(): Retornos {
     if (this.tipo == 4) {
       return { value: this.value.toString, type: Type.CADENA };
-    }
+    } else return { value: null, type: Type.NULL };
   }
 }
+/*      E
+  E     +   E
+Literal  Literal
+    5       3
+True, false, numero, cadena, char
+*/

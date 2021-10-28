@@ -1,12 +1,17 @@
 /*------------------------------------------------IMPORTACIONES----------------------------------------------*/
 %{
-    /*const {Aritmetica,TipoAritmetica} = require('../Expresiones/Aritmeticas')
+    const {Aritmetica,TipoAritmetica} = require('../Expresiones/Aritmeticas')
     const {Relacional,TipoRelacional} = require('../Expresiones/Relacionales')
-    const {Literal,TipoLiteral} = require('../Expresiones/Literal')*/
+    const {Literal,TipoLiteral} = require('../Expresiones/Literal')
 %}
 /*------------------------------------------------Analisis Lexico----------------------------------------------*/
 %lex
 %options case-insensitive
+LCADENA =[\"\“] [^\"\”\'\n]* [\"\”\n]
+LENTERO = [0-9]+\b 
+LDOUBLE = [0-9]+("."[0-9]+)?\b 
+LCARACTER = [\'][^\'][\']
+ID = ([a-zA-Z])[a-zA-Z0-9_]* 
 %%
 // "" %{return '';%}
 "?"    %{return 'Ternario';%}
@@ -46,12 +51,15 @@
 "="                     %{return 'Igual';%}
 
 [&][&]                  %{return 'And';%}
-"||"                    %{return 'Or_';%}
+"||"                    %{return 'Or';%}
 '!'                     %{return 'Not';%}
 
-[0-9]+\b                    %{return 'Entero';%}
-[0-9]+("."[0-9]+)?\b        %{return 'Double';%}
-([a-zA-Z])[a-zA-Z0-9_]*     %{return 'Id';%}
+{LCADENA}     %{return 'Cadena';%}
+{LENTERO}     %{return 'Entero';%}
+{LDOUBLE}     %{return 'Double';%}
+{LCARACTE}    %{return 'Caracter';%}
+{ID}     %{return 'Id';%}
+
 
 
 [ \t\r\n\f]+                                   { /*se ignoran*/ }
@@ -78,8 +86,8 @@
 INICIO: EXPRESION PComa EOF { return $1; };//EOF SE REFIERE AL FIN DEL PROGRAMA
 
 
-EXPRESION: 
-  Resta EXPRESION %prec UMENOS        {}
+EXPRESION
+  : Resta EXPRESION %prec UMENOS      {}
   |Not EXPRESION                      {}
   |EXPRESION Division EXPRESION       {}
   |EXPRESION Suma EXPRESION           {}
@@ -93,10 +101,11 @@ EXPRESION:
   |EXPRESION MenorI EXPRESION         {}
   |EXPRESION Diferencia EXPRESION     {}
   |EXPRESION DIgual EXPRESION         {} 
-  |ParA EXPRESION ParC                {}
+  |ParA EXPRESION ParC                {$$ = $2}
   |Double                             {$$ = new Literal($1, TipoLiteral.DOUBLE, @1first_line, @1first_column)}
   |Entero                             {$$ = new Literal($1, TipoLiteral.ENTERO, @1first_line, @1first_column)}
-  |Id                                 {$$ = new Literal($1, TipoLiteral.CADENA, @1first_line, @1first_column)}
   |True_                              {$$ = new Literal($1, TipoLiteral.BOOLEAN, @1first_line, @1first_column)}
   |False_                             {$$ = new Literal($1, TipoLiteral.BOOLEAN, @1first_line, @1first_column)}
+  |Caracter                           {$$ = new Literal($1, TipoLiteral.CARACTER, @1first_line, @1first_column)}
+  |Cadena                             {$$ = new Literal($1, TipoLiteral.CADENA, @1first_line, @1first_column)}
   ; //TODO agreagar cadenas 

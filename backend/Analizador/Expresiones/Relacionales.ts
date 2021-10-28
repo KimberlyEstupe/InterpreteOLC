@@ -1,5 +1,5 @@
-import { Expresiones } from "./Expresion";
-import { Retornos, Type } from "./Retornos";
+import { Expresiones } from "./ExpresionBase";
+import { Retornos, Type } from "./TablaTipos";
 
 export enum TRelacion {
   And,
@@ -29,5 +29,7 @@ export class Relacionales extends Expresiones {
     const rightValue = this.right.execute();
     //TODO IF
     return { value: XPathResult, type: Type.BOOLEAN };
+    // else return {value: null, type: Type.NULL}
   }
 }
+// >< >= <= ==

@@ -1,4 +1,4 @@
-import { Type, Retornos, Tipos } from "./Retornos";
+import { Type, Retornos, Tipos } from "./TablaTipos";
 
 export abstract class Expresiones {
   public linea: number;
