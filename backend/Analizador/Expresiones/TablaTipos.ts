@@ -1,9 +1,9 @@
 export enum Type {
-  ENTERO = 0,
-  DOBLE = 1,
+  STRING = 0, //Cadena
+  INT = 1, //entero
   BOOLEAN = 2,
-  CARACTER = 3,
-  CADENA = 4,
+  CHAR = 3, //Caracter
+  DOBLE = 4,
   NULL = 5,
 }
 
@@ -13,9 +13,9 @@ export type Retornos = {
 };
 
 export const Tipos = [
-  [Type.ENTERO, Type.DOBLE, Type.ENTERO, Type.ENTERO, Type.CADENA],
-  [Type.DOBLE, Type.DOBLE, Type.DOBLE, Type.DOBLE, Type.CADENA],
-  [Type.ENTERO, Type.DOBLE, Type.NULL, Type.NULL, Type.CADENA],
-  [Type.ENTERO, Type.DOBLE, Type.NULL, Type.CADENA, Type.CADENA],
-  [Type.CADENA, Type.CADENA, Type.CADENA, Type.CADENA, Type.CADENA],
+  [Type.INT, Type.DOBLE, Type.INT, Type.INT, Type.STRING],
+  [Type.DOBLE, Type.DOBLE, Type.DOBLE, Type.DOBLE, Type.STRING],
+  [Type.INT, Type.DOBLE, Type.NULL, Type.NULL, Type.STRING],
+  [Type.INT, Type.DOBLE, Type.NULL, Type.STRING, Type.STRING],
+  [Type.STRING, Type.STRING, Type.STRING, Type.STRING, Type.STRING],
 ];

@@ -6,28 +6,30 @@ export enum TLiteral {
   DOBLE = 1,
   BOOLEAN = 2,
   CARACTER = 3,
-  CADENA = 4,
+  STRING = 4,
 }
 
 export abstract class Lirerales extends Expresiones {
   constructor(
     private value: NavigationType,
     private tipo: TLiteral,
-    line: number,
+    linea: number,
     col: number
   ) {
-    super(line, col);
+    super(linea, col);
   }
 
   public execute(): Retornos {
     if (this.tipo == 4) {
-      return { value: this.value.toString, type: Type.CADENA };
-    } else return { value: null, type: Type.NULL };
+      return { value: this.value.toString, type: Type.STRING };
+    } else {
+      return { value: null, type: Type.NULL };
+    }
   }
 }
 /*      E
   E     +   E
 Literal  Literal
     5       3
-True, false, numero, cadena, char
+True, false, numero, STRING, char
 */

@@ -14,19 +14,18 @@ export enum TRelacion {
 
 export class Relacionales extends Expresiones {
   constructor(
-    private left: Expresiones,
-    private right: Expresiones,
+    private Izq: Expresiones,
+    private Der: Expresiones,
     private tipo: TRelacion,
-    line: number,
+    linea: number,
     col: number
   ) {
-    super(line, col);
+    super(linea, col);
   }
 
   public execute(): Retornos {
-    const leftValue = this.left.execute();
-
-    const rightValue = this.right.execute();
+    const DerV = this.Der.execute();
+    const IzqV = this.Izq.execute();
     //TODO IF
     return { value: XPathResult, type: Type.BOOLEAN };
     // else return {value: null, type: Type.NULL}

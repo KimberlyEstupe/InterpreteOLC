@@ -40,6 +40,7 @@ ID = ([a-zA-Z])[a-zA-Z0-9_]*
 
 ";"     %{console.log('pcoma');return 'PComa';%}
 ","     %{return 'Coma';%}
+':'     %{return 'DPuntos';%}
 
 
 "<="                    %{return 'MayorI';%}
@@ -71,13 +72,16 @@ ID = ([a-zA-Z])[a-zA-Z0-9_]*
 /*------------------------------------ SINTACTICO ------------------------------------*/
 
 // Presedencia
-%left Or
-%left And
-%right Not
-%left DIgual, Diferencia, Mayor, MayorI, Menor, MenorI
+%left 'Ternario', 'DPuntos'
+%left 'Or'
+%left 'And'
+%right 'Not'
+%left 'Diferencia','Igual'
+%left 'DIgual',  'Mayor', 'MayorI', 'Menor', MenorI
 %left 'Suma', Resta
 %left 'Division', 'Multiplicacion'
-%right UMENOS
+%left UMENOS
+%right 'Not'
 
 /*********** INICIO ***************/
 %start INICIO
@@ -100,12 +104,12 @@ EXPRESION
   |EXPRESION MayorI EXPRESION         {} 
   |EXPRESION MenorI EXPRESION         {}
   |EXPRESION Diferencia EXPRESION     {}
-  |EXPRESION DIgual EXPRESION         {} 
+  |EXPRESION DIgual EXPRESION         {$$ = } 
   |ParA EXPRESION ParC                {$$ = $2}
-  |Double                             {$$ = new Literal($1, TipoLiteral.DOUBLE, @1first_line, @1first_column)}
-  |Entero                             {$$ = new Literal($1, TipoLiteral.ENTERO, @1first_line, @1first_column)}
+  |Double                             {$$ = new Literal($1, TipoLiteral.DOBLE, @1first_line, @1first_column)}
+  |Entero                             {$$ = new Literal($1, TipoLiteral.INT, @1first_line, @1first_column)}
   |True_                              {$$ = new Literal($1, TipoLiteral.BOOLEAN, @1first_line, @1first_column)}
   |False_                             {$$ = new Literal($1, TipoLiteral.BOOLEAN, @1first_line, @1first_column)}
-  |Caracter                           {$$ = new Literal($1, TipoLiteral.CARACTER, @1first_line, @1first_column)}
-  |Cadena                             {$$ = new Literal($1, TipoLiteral.CADENA, @1first_line, @1first_column)}
+  |Caracter                           {$$ = new Literal($1, TipoLiteral.CHAR, @1first_line, @1first_column)}
+  |Cadena                             {$$ = new Literal($1, TipoLiteral.STRING, @1first_line, @1first_column)}
   ; //TODO agreagar cadenas 

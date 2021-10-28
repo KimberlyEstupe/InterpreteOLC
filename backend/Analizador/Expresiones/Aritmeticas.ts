@@ -2,18 +2,18 @@ import { Expresiones } from "./ExpresionBase";
 import { Retornos, Type } from "./TablaTipos";
 
 export enum TAritmetica {
-  Suma,
-  Resta,
-  Division,
-  Multiplicacion,
-  Potencia,
-  Mudulo,
+  SUMAR,
+  RESTAR,
+  DIVIDE,
+  MULTIPLICA,
+  POTENCIA,
+  MODULO,
 }
 
 export abstract class Aritmeticas extends Expresiones {
   constructor(
-    private Left: Expresiones,
-    private Rigt: Expresiones,
+    private Izq: Expresiones,
+    private Der: Expresiones,
     private tipoA: TAritmetica,
     linea: number,
     col: number
@@ -22,15 +22,15 @@ export abstract class Aritmeticas extends Expresiones {
   }
 
   public execute(): Retornos {
-    const LefthV = this.Left.execute();
-    const rightV = this.Rigt.execute();
-    let Dominante = this.TipoDominante(rightV.type, LefthV.type);
+    const IzqV = this.Izq.execute();
+    const DerV = this.Der.execute();
+    let Dominante = this.TipoDominante(DerV.type, IzqV.type);
 
-    if (this.tipoA == TAritmetica.Suma) {
-      if (Dominante == Type.CADENA) {
+    if (this.tipoA == TAritmetica.SUMAR) {
+      if (Dominante == Type.STRING) {
         return {
-          value: LefthV.value.toString() + rightV.value.toString(),
-          type: Type.CADENA,
+          value: IzqV.value.toString() + DerV.value.toString(),
+          type: Type.STRING,
         };
       }
     }
