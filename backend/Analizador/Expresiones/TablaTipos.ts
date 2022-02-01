@@ -1,9 +1,9 @@
 export enum Type {
-  STRING = 0, //Cadena
-  INT = 1, //entero
+  INT = 0,
+  DOBLE = 1,
   BOOLEAN = 2,
-  CHAR = 3, //Caracter
-  DOBLE = 4,
+  CHAR = 3,
+  STRING = 4,
   NULL = 5,
 }
 

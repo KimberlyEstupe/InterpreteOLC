@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "compila": "jison ./Analizador/Gramatica/analiza.jison && move ./analiza.js ./Analizador/Gramatica && node ./Analizador/Gramatica/Ej.js"
+    "compila": "npx tsc && jison ./dist/Gramatica/analiza.jison && move ./analiza.js ./dist/Gramatica && node ./dist/Gramatica/Ej.js"
   },
   "keywords": [],
   "author": "",

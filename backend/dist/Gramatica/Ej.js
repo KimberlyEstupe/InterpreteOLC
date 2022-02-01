@@ -1,7 +1,7 @@
 var fs = require("fs"); //Llama a la libreria fs, esta se encarga de los archivos
 var parse = require("./analiza"); //llama al archivo analixador para ejcutarlo
 
-fs.readFile("./Analizador/Gramatica/Entrada.txt", (err, data) => {
+fs.readFile("./dist/Gramatica/Entrada.txt", (err, data) => {
   if (err) throw err;
 
   parse.parse(data.toString());

@@ -1,15 +1,14 @@
 import { Expresiones } from "./ExpresionBase";
 import { Retornos, Type } from "./TablaTipos";
+import { Errores } from "../Errores/Error";
 
 export enum TRelacion {
-  And,
-  Or,
-  Mayor,
-  Menor,
-  MayorI,
-  MenorI,
-  Digual,
-  Diferencia,
+  MAYOR,
+  MENOR,
+  MAYORI,
+  MENORI,
+  DIGUAL,
+  DIFERENCIA,
 }
 
 export class Relacionales extends Expresiones {
@@ -26,9 +25,21 @@ export class Relacionales extends Expresiones {
   public execute(): Retornos {
     const DerV = this.Der.execute();
     const IzqV = this.Izq.execute();
-    //TODO IF
-    return { value: XPathResult, type: Type.BOOLEAN };
-    // else return {value: null, type: Type.NULL}
+
+    if (this.tipo == TRelacion.DIGUAL) {
+      return { value: IzqV.value == DerV.value, type: Type.BOOLEAN };
+    } else if (this.tipo == TRelacion.MAYOR) {
+      return { value: IzqV.value > DerV.value, type: Type.BOOLEAN };
+    } else if (this.tipo == TRelacion.MENOR) {
+      return { value: IzqV.value < DerV.value, type: Type.BOOLEAN };
+    } else if (this.tipo == TRelacion.MAYORI) {
+      return { value: IzqV.value >= DerV.value, type: Type.BOOLEAN };
+    } else if (this.tipo == TRelacion.MENORI) {
+      return { value: IzqV.value <= DerV.value, type: Type.BOOLEAN };
+    } else if (this.tipo == TRelacion.DIFERENCIA) {
+      return { value: IzqV.value != DerV.value, type: Type.BOOLEAN };
+    }
+    return { value: "", type: Type.NULL };
   }
 }
 // >< >= <= ==

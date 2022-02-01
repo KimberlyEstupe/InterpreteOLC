@@ -2,16 +2,16 @@ import { Expresiones } from "./ExpresionBase";
 import { Type, Retornos, Tipos } from "./TablaTipos";
 
 export enum TLiteral {
-  ENTERO = 0,
+  INT = 0,
   DOBLE = 1,
   BOOLEAN = 2,
-  CARACTER = 3,
+  CHAR = 3,
   STRING = 4,
 }
 
 export abstract class Lirerales extends Expresiones {
   constructor(
-    private value: NavigationType,
+    private value: any,
     private tipo: TLiteral,
     linea: number,
     col: number
@@ -20,16 +20,20 @@ export abstract class Lirerales extends Expresiones {
   }
 
   public execute(): Retornos {
-    if (this.tipo == 4) {
-      return { value: this.value.toString, type: Type.STRING };
-    } else {
-      return { value: null, type: Type.NULL };
+    if (this.tipo == TLiteral.STRING) {
+      return { value: this.value.toString(), type: Type.STRING };
+    } else if (this.tipo == TLiteral.INT) {
+      return { value: Number(this.value), type: Type.INT };
+    } else if (this.tipo == TLiteral.DOBLE) {
+      return { value: parseFloat(this.value), type: Type.DOBLE };
+    } else if (this.tipo == TLiteral.CHAR) {
+      const letra = this.value;
+      return { value: letra[0], type: Type.CHAR }; //TODO Convertir a char
     }
+
+    if (this.value.toString().toLowerCase() == "true") {
+      return { value: true, type: Type.BOOLEAN };
+    }
+    return { value: false, type: Type.BOOLEAN };
   }
 }
-/*      E
-  E     +   E
-Literal  Literal
-    5       3
-True, false, numero, STRING, char
-*/

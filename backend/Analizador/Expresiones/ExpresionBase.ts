@@ -3,6 +3,7 @@ import { Type, Retornos, Tipos } from "./TablaTipos";
 export abstract class Expresiones {
   public linea: number;
   public col: number;
+
   constructor(linea: number, columna: number) {
     this.col = columna;
     this.linea = linea;
